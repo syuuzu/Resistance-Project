@@ -46,7 +46,22 @@ fn main() {
     //match statement to eval commands
     match command.as_str() {
         //generate key
-        "generate" => {}
+        "generate" => {
+            if args.len() != 4 {
+                eprintln!(
+                    "Usage: {} generate <size_in_bytes> <output_key_file>",
+                    args[0]
+                );
+                process::exit(1);
+            }
+            let size: usize = args[2].parse().unwrap_or_else(|_| {
+                eprintln!("Invalid size parameter.");
+                process::exit(1);
+            });
+
+            let path = &args[3];
+            generate_key(size, path);
+        }
         //encrypt command
         "encrypt" => {}
         //else
