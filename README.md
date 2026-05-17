@@ -49,8 +49,11 @@ Options:
 
 ## Resources used
 [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/)
+
 [The Cargo Book](https://doc.rust-lang.org/cargo/commands/cargo-vendor.html)
+
 [QR Code](https://docs.rs/qrcode/latest/qrcode/)
+
 [Wikipedia Salsa20](https://en.wikipedia.org/wiki/Salsa20)
 ## License
 
