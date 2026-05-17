@@ -1,8 +1,8 @@
-# Resistance OTP
+# Resistance Project
 
-A One-Time Pad (OTP) designed for communication in a highly constrained, zero-trust environment.
+This is a stream cipher program designed for communication in a highly constrained, zero-trust environment.
 
-This program assumes major industrial hardware and open-source software distributions are subverted.
+This project assumes major industrial hardware and open-source software distributions are subverted.
 ## Core Features
 
 * **QR Code Transmission:** A sterile machine displays a QR code with encrypted data which is scanned by a secondary "dirty" transmission device. 
@@ -25,16 +25,16 @@ cargo build --release
 
 ## Usage
 ```bash
-./resistance_otp --help
+./resistance --help
 ```
 ```bash
-Resistance OTP
+Resistance Project
 
 Usage:
-  ./resistance_otp -generate|-g <size_in_bytes> <output_key_file>
-  ./resistance_otp -encrypt|-e <input_file> <key_file>
-  ./resistance_otp -decrypt|-d <input_file> <key_file>
-  ./resistance_otp --help
+  ./resistance -generate|-g <size_in_bytes> <output_key_file>
+  ./resistance -encrypt|-e <input_file> <key_file>
+  ./resistance -decrypt|-d <input_file> <key_file>
+  ./resistance --help
 
 Options:
   -g <size_in_bytes> <output_key_file> generates a key pad of size <size_in_bytes> to <output_key_file>. Never reuse a key pad. 
@@ -45,8 +45,7 @@ Options:
 
 ## WARNINGS
 
-1. **NEVER REUSE A PAD:**  This is a ONE-TME pad. If a key file is used to encrypt more than one message your encrypted messages are at risk of being recovered.
-2. **DATA LIMITS:**  Because the encryption output uses a QR code, a single ciphertext can't exceed **2,953 bytes**.
+1. **DATA LIMITS:**  Because the encryption output uses a QR code, a single ciphertext can't exceed **2,953 bytes**.
 
 ## License
 

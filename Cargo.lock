@@ -67,7 +67,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "rust-otp"
+name = "resistance"
 version = "0.1.0"
 dependencies = [
  "qrcode",

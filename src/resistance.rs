@@ -120,7 +120,7 @@ fn decrypt(input_path: &str, key_path: &str) {
 }
 
 fn display_usage(name: &str) {
-    println!("Resistance OTP\n");
+    println!("Resistance Project\n");
     println!("Usage:");
     println!("  {} -generate|-g <size_in_bytes> <output_key_file>", name);
     println!("  {} -encrypt|-e <input_file> <key_file>", name);
