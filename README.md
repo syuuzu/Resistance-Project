@@ -31,10 +31,10 @@ cargo build --release
 Resistance OTP
 
 Usage:
-  target/debug/resistance_otp -generate|-g <size_in_bytes> <output_key_file>
-  target/debug/resistance_otp -encrypt|-e <input_file> <key_file>
-  target/debug/resistance_otp -decrypt|-d <input_file> <key_file>
-  target/debug/resistance_otp --help
+  ./resistance_otp -generate|-g <size_in_bytes> <output_key_file>
+  ./resistance_otp -encrypt|-e <input_file> <key_file>
+  ./resistance_otp -decrypt|-d <input_file> <key_file>
+  ./resistance_otp --help
 
 Options:
   -g <size_in_bytes> <output_key_file> generates a key pad of size <size_in_bytes> to <output_key_file>. Never reuse a key pad.
