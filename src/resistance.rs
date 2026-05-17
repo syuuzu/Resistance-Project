@@ -6,18 +6,10 @@ use std::process;
 
 //salsa20 quarter round with mod 2^32 add, xor update, and bit shifts
 fn quarter_round(state: &mut [u32; 16], a: usize, b: usize, c: usize, d: usize) {
-    state[a] = state[a].wrapping_add(state[b]);
-    state[d] ^= state[a];
-    state[d] = state[d].rotate_left(7);
-    state[c] = state[c].wrapping_add(state[d]);
-    state[b] ^= state[c];
-    state[b] = state[b].rotate_left(9);
-    state[a] = state[a].wrapping_add(state[b]);
-    state[d] ^= state[a];
-    state[d] = state[d].rotate_left(13);
-    state[c] = state[c].wrapping_add(state[d]);
-    state[b] ^= state[c];
-    state[b] = state[b].rotate_left(18);
+    state[b] ^= state[a].wrapping_add(state[d]).rotate_left(7);
+    state[c] ^= state[b].wrapping_add(state[a]).rotate_left(9);
+    state[d] ^= state[c].wrapping_add(state[b]).rotate_left(13);
+    state[a] ^= state[d].wrapping_add(state[c]).rotate_left(18);
 }
 
 //64 bit block of salsa20
