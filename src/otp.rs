@@ -131,7 +131,7 @@ fn display_usage(name: &str) {
         "  -g <size_in_bytes> <output_key_file> generates a key pad of size <size_in_bytes> to <output_key_file>. Never reuse a key pad."
     );
     println!(
-        "  -e <input_file> <key_file> displays a QR code of <input_file> encrypted with <key_file>."
+        "  -e <input_file> <key_file> displays a QR code of <input_file> encrypted with <key_file>. Max size of file size 2953 bytes."
     );
     println!("  -d <input_file> <key_file> prints decrypted <input_file> using <key_file>.");
     println!("  --help displays this message.");
