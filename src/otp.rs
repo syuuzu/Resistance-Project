@@ -118,21 +118,21 @@ fn decrypt(input_path: &str, key_path: &str) {
 }
 
 fn display_usage(name: &str) {
-    println!("Rust OTP Util)");
+    println!("Rust OTP Util\n");
     println!("Usage:");
     println!("  {} -generate|-g <size_in_bytes> <output_key_file>", name);
     println!("  {} -encrypt|-e <input_file> <key_file>", name);
     println!("  {} -decrypt|-d <input_file> <key_file>", name);
     println!("  {} --help", name);
-    println!("Options:");
+    println!("\nOptions:");
     println!(
         "  -g <size_in_bytes> <output_key_file> generates a key pad of size <size_in_bytes> to <output_key_file>. Never reuse a key pad."
     );
     println!(
-        "  -e <input_file> <key_file> displays a qr code of <input_file> encrypted with <key_file>."
+        "  -e <input_file> <key_file> displays a QR code of <input_file> encrypted with <key_file>."
     );
     println!("  -d <input_file> <key_file> prints decrypted <input_file> using <key_file>.");
-    println!("  --help shows this message.");
+    println!("  --help displays this message.");
 }
 
 fn main() {
