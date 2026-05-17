@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::{Read, Write};
 use std::process;
 
-//plan to use linux's built in CSPRNG to generate the key
+//uses linux's built in CSPRNG to generate the key
 //(possible flaw if linux is subverted but better than using a non cryptographically safe PRNG)
 fn generate_key(size: usize, path: &str) {
     //open linux's kernel entropy pool
