@@ -33,6 +33,61 @@ fn generate_key(size: usize, path: &str) {
     println!("Generated key to '{}'", path)
 }
 
+fn crypt(input_path: &str, key_path: &str, output_path: &str) {
+    //open and read input file
+    let mut input_file = File::open(input_path).unwrap_or_else(|err| {
+        eprintln!("Failed to open input file '{}': {}", input_path, err);
+        process::exit(1);
+    });
+    let mut input_data = Vec::new();
+    input_file
+        .read_to_end(&mut input_data)
+        .unwrap_or_else(|err| {
+            eprintln!("Failed to read input file: {}", err);
+            process::exit(1);
+        });
+
+    //open and read key file
+    let mut key_file = File::open(key_path).unwrap_or_else(|err| {
+        eprintln!("Failed to open key file '{}': {}", key_path, err);
+        process::exit(1);
+    });
+    let mut key_data = Vec::new();
+    key_file.read_to_end(&mut key_data).unwrap_or_else(|err| {
+        eprintln!("Failed to read key file: {}", err);
+        process::exit(1);
+    });
+
+    //make sure key is longer than what is being encrypted
+    if key_data.len() < input_data.len() {
+        eprintln!(
+            "Key length ({}) is shorter than input length ({})!",
+            key_data.len(),
+            input_data.len()
+        );
+        process::exit(1);
+    }
+
+    //bitwise XOR to encrypt/decrypt
+    let mut output_data = Vec::with_capacity(input_data.len());
+    //loop for each bit
+    for i in 0..input_data.len() {
+        output_data.push(input_data[i] ^ key_data[i]);
+    }
+
+    //write to file (for now)
+    let mut output_file = File::create(output_path).unwrap_or_else(|err| {
+        eprintln!("Failed to create output file at '{}': {}", output_path, err);
+        process::exit(1);
+    });
+    output_file.write_all(&output_data).unwrap_or_else(|err| {
+        eprintln!("Failed to write output file: {}", err);
+        process::exit(1);
+    });
+
+    println!("Message saved to: {}", output_path);
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
@@ -62,8 +117,8 @@ fn main() {
             let path = &args[3];
             generate_key(size, path);
         }
-        //encrypt command
-        "encrypt" => {}
+        //encrypt/decrypt command
+        "crypt" => {}
         //else
         _ => {
             eprintln!("Unknown command: {}", command);
