@@ -88,11 +88,19 @@ fn crypt(input_path: &str, key_path: &str, output_path: &str) {
     println!("Message saved to: {}", output_path);
 }
 
+fn display_usage(name: &str) {
+    eprintln!("Rust OTP Util)");
+    eprintln!("Usage:");
+    eprintln!(" {} generate <size_in_bytes> <output_key_file>", name);
+    eprintln!(" {} crypt <input_file> <key_file> <output_file>", name);
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    if (args.len() < 2) {
+    if args.len() < 2 {
         //exit if less than 2 args
+        display_usage(&args[0]);
         process::exit(1);
     }
 
@@ -118,10 +126,23 @@ fn main() {
             generate_key(size, path);
         }
         //encrypt/decrypt command
-        "crypt" => {}
+        "crypt" => {
+            if args.len() != 5 {
+                eprintln!(
+                    "Usage: {} crypt <input_file> <key_file> <output_file>",
+                    args[0]
+                );
+                process::exit(1);
+            }
+            let input_path = &args[2];
+            let key_path = &args[3];
+            let output_path = &args[4];
+            crypt(input_path, key_path, output_path);
+        }
         //else
         _ => {
             eprintln!("Unknown command: {}", command);
+            display_usage(&args[0]);
             process::exit(1);
         }
     }
