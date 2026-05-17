@@ -118,11 +118,21 @@ fn decrypt(input_path: &str, key_path: &str) {
 }
 
 fn display_usage(name: &str) {
-    eprintln!("Rust OTP Util)");
-    eprintln!("Usage:");
-    eprintln!(" {} generate <size_in_bytes> <output_key_file>", name);
-    eprintln!(" {} encrypt <input_file> <key_file>", name);
-    eprintln!(" {} decrypt <input_file> <key_file>", name);
+    println!("Rust OTP Util)");
+    println!("Usage:");
+    println!("  {} -generate|-g <size_in_bytes> <output_key_file>", name);
+    println!("  {} -encrypt|-e <input_file> <key_file>", name);
+    println!("  {} -decrypt|-d <input_file> <key_file>", name);
+    println!("  {} --help", name);
+    println!("Options:");
+    println!(
+        "  -g <size_in_bytes> <output_key_file> generates a key pad of size <size_in_bytes> to <output_key_file>. Never reuse a key pad."
+    );
+    println!(
+        "  -e <input_file> <key_file> displays a qr code of <input_file> encrypted with <key_file>."
+    );
+    println!("  -d <input_file> <key_file> prints decrypted <input_file> using <key_file>.");
+    println!("  --help shows this message.");
 }
 
 fn main() {
@@ -138,8 +148,13 @@ fn main() {
 
     //match statement to eval commands
     match command.as_str() {
+        //help flags to explain commands
+        "--help" | "-h" | "help" => {
+            display_usage(&args[0]);
+            process::exit(0);
+        }
         //generate key
-        "generate" => {
+        "generate" | "-generate" | "-g" => {
             if args.len() != 4 {
                 eprintln!(
                     "Usage: {} generate <size_in_bytes> <output_key_file>",
@@ -156,7 +171,7 @@ fn main() {
             generate_key(size, path);
         }
         //encrypt command takes in a message and a key file to generate a qr code
-        "encrypt" => {
+        "encrypt" | "-encrypt" | "-e" => {
             if args.len() != 4 {
                 eprintln!("Usage: {} crypt <input_file> <key_file>", args[0]);
                 process::exit(1);
@@ -165,7 +180,7 @@ fn main() {
             let key_path = &args[3];
             encrypt(input_path, key_path);
         }
-        "decrypt" => {
+        "decrypt" | "-decrypt" | "-d" => {
             if args.len() != 4 {
                 eprintln!("Usage: {} crypt <input_file> <key_file>", args[0]);
                 process::exit(1);
