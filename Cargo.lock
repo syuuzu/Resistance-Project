@@ -67,7 +67,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "resistance"
+name = "resistance-project"
 version = "0.1.0"
 dependencies = [
  "qrcode",

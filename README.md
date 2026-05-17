@@ -47,6 +47,11 @@ Options:
 
 1. **DATA LIMITS:**  Because the encryption output uses a QR code, a single ciphertext can't exceed **2,953 bytes**.
 
+## Resources used
+[Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/)
+[The Cargo Book](https://doc.rust-lang.org/cargo/commands/cargo-vendor.html)
+[QR Code](https://docs.rs/qrcode/latest/qrcode/)
+[Wikipedia Salsa20](https://en.wikipedia.org/wiki/Salsa20)
 ## License
 
 This project is licensed under the [Apache License 2.0](LICENSE).
