@@ -1,4 +1,5 @@
 use qrcode::QrCode;
+use qrcode::render::image;
 use std::env;
 use std::fs::File;
 use std::io::{Read, Write};
@@ -94,6 +95,45 @@ fn display_usage(name: &str) {
     eprintln!("Usage:");
     eprintln!(" {} generate <size_in_bytes> <output_key_file>", name);
     eprintln!(" {} crypt <input_file> <key_file> <output_file>", name);
+    eprintln!(" {} qr <input_file>", name);
+}
+
+fn show_qr(input_path: &str) {
+    let mut file = File::open(input_path).unwrap_or_else(|err| {
+        eprintln!("Failed to open input file '{}': {}", input_path, err);
+        process::exit(1);
+    });
+
+    let mut message = Vec::new();
+    file.read_to_end(&mut message).unwrap_or_else(|err| {
+        eprintln!("Failed to read file: {}", err);
+        process::exit(1);
+    });
+
+    //make sure message is small enough to fit on a qr code (from what I could find 2953 is the max bytes)
+    if message.len() > 2953 {
+        eprintln!(
+            "File is too big to fit onto a qr code. Max size is 2953 bytes your file is {} bytes.",
+            message.len()
+        );
+        process::exit(1);
+    }
+
+    //print qr code
+    let code = QrCode::new(&message).unwrap_or_else(|_| {
+        eprintln!("Failed to encode to QR code");
+        process::exit(1);
+    });
+
+    //using ansi color codes to make a qr code in the terminal
+    let image = code
+        .render::<&str>()
+        .quiet_zone(true)
+        .dark_color("\x1b[40m  \x1b[0m")
+        .light_color("\x1b[47m  \x1b[0m")
+        .build();
+
+    println!("{}", image);
 }
 
 fn main() {
@@ -139,6 +179,16 @@ fn main() {
             let key_path = &args[3];
             let output_path = &args[4];
             crypt(input_path, key_path, output_path);
+        }
+        //qr command
+        "qr" => {
+            if args.len() != 3 {
+                eprintln!("Usage: {} qr <input_file>", args[0]);
+                process::exit(1);
+            }
+
+            let input_path = &args[2];
+            show_qr(input_path);
         }
         //else
         _ => {
