@@ -18,7 +18,7 @@ This software is intended to be run on a strictly air-gapped machine (e.g. a Lib
 
 1. On a "dirty" internet connected machine, clone this repository.
 2. Burn the entire project directory to a read-only CD-R or DVD-R.
-3. Insert the optical media into your air-gapped machine.
+3. Insert the disk into your air-gapped machine.
 4. Compile the binary locally on the trusted hardware:
 ```bash
 cargo build --release
@@ -46,7 +46,7 @@ Options:
 
 ## WARNINGS
 
-1. **NEVER REUSE A PAD:**  This is a ONE-TME pad. If a key file is used to encrypt more than one message your encrypted messages are at risk to be recovered.
+1. **NEVER REUSE A PAD:**  This is a ONE-TME pad. If a key file is used to encrypt more than one message your encrypted messages are at risk of being recovered.
 2. **DATA LIMITS:**  Because the encryption output uses a QR code, a single ciphertext can't exceed **2,953 bytes**.
 
 ## License
