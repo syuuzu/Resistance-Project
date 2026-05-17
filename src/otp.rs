@@ -1,5 +1,4 @@
 use qrcode::QrCode;
-use qrcode::render::image;
 use std::env;
 use std::fs::File;
 use std::io::{Read, Write};
@@ -35,7 +34,8 @@ fn generate_key(size: usize, path: &str) {
     println!("Generated key to '{}'", path)
 }
 
-fn crypt(input_path: &str, key_path: &str, output_path: &str) {
+//preforms the xor operation and returns the result as a vector
+fn xor_key(input_path: &str, key_path: &str) -> Vec<u8> {
     //open and read input file
     let mut input_file = File::open(input_path).unwrap_or_else(|err| {
         eprintln!("Failed to open input file '{}': {}", input_path, err);
@@ -77,50 +77,23 @@ fn crypt(input_path: &str, key_path: &str, output_path: &str) {
         output_data.push(input_data[i] ^ key_data[i]);
     }
 
-    //write to file (for now)
-    let mut output_file = File::create(output_path).unwrap_or_else(|err| {
-        eprintln!("Failed to create output file at '{}': {}", output_path, err);
-        process::exit(1);
-    });
-    output_file.write_all(&output_data).unwrap_or_else(|err| {
-        eprintln!("Failed to write output file: {}", err);
-        process::exit(1);
-    });
-
-    println!("Message saved to: {}", output_path);
+    return output_data;
 }
 
-fn display_usage(name: &str) {
-    eprintln!("Rust OTP Util)");
-    eprintln!("Usage:");
-    eprintln!(" {} generate <size_in_bytes> <output_key_file>", name);
-    eprintln!(" {} crypt <input_file> <key_file> <output_file>", name);
-    eprintln!(" {} qr <input_file>", name);
-}
-
-fn show_qr(input_path: &str) {
-    let mut file = File::open(input_path).unwrap_or_else(|err| {
-        eprintln!("Failed to open input file '{}': {}", input_path, err);
-        process::exit(1);
-    });
-
-    let mut message = Vec::new();
-    file.read_to_end(&mut message).unwrap_or_else(|err| {
-        eprintln!("Failed to read file: {}", err);
-        process::exit(1);
-    });
+fn encrypt(input_path: &str, key_path: &str) {
+    let encrypted = xor_key(input_path, key_path);
 
     //make sure message is small enough to fit on a qr code (from what I could find 2953 is the max bytes)
-    if message.len() > 2953 {
+    if encrypted.len() > 2953 {
         eprintln!(
-            "File is too big to fit onto a qr code. Max size is 2953 bytes your file is {} bytes.",
-            message.len()
+            "Encrypted file is too big to fit onto a qr code. Max size is 2953 bytes your file is {} bytes.",
+            encrypted.len()
         );
         process::exit(1);
     }
 
     //print qr code
-    let code = QrCode::new(&message).unwrap_or_else(|_| {
+    let code = QrCode::new(&encrypted).unwrap_or_else(|_| {
         eprintln!("Failed to encode to QR code");
         process::exit(1);
     });
@@ -134,6 +107,22 @@ fn show_qr(input_path: &str) {
         .build();
 
     println!("{}", image);
+}
+
+fn decrypt(input_path: &str, key_path: &str) {
+    let output_data = xor_key(input_path, key_path);
+    let message =
+        String::from_utf8(output_data).expect("Decryption failed to decode the file to utf8.");
+    println!("---------DECODED MESSAGE---------");
+    println!("{}", message);
+}
+
+fn display_usage(name: &str) {
+    eprintln!("Rust OTP Util)");
+    eprintln!("Usage:");
+    eprintln!(" {} generate <size_in_bytes> <output_key_file>", name);
+    eprintln!(" {} encrypt <input_file> <key_file>", name);
+    eprintln!(" {} decrypt <input_file> <key_file>", name);
 }
 
 fn main() {
@@ -166,29 +155,24 @@ fn main() {
             let path = &args[3];
             generate_key(size, path);
         }
-        //encrypt/decrypt command
-        "crypt" => {
-            if args.len() != 5 {
-                eprintln!(
-                    "Usage: {} crypt <input_file> <key_file> <output_file>",
-                    args[0]
-                );
+        //encrypt command takes in a message and a key file to generate a qr code
+        "encrypt" => {
+            if args.len() != 4 {
+                eprintln!("Usage: {} crypt <input_file> <key_file>", args[0]);
                 process::exit(1);
             }
             let input_path = &args[2];
             let key_path = &args[3];
-            let output_path = &args[4];
-            crypt(input_path, key_path, output_path);
+            encrypt(input_path, key_path);
         }
-        //qr command
-        "qr" => {
-            if args.len() != 3 {
-                eprintln!("Usage: {} qr <input_file>", args[0]);
+        "decrypt" => {
+            if args.len() != 4 {
+                eprintln!("Usage: {} crypt <input_file> <key_file>", args[0]);
                 process::exit(1);
             }
-
             let input_path = &args[2];
-            show_qr(input_path);
+            let key_path = &args[3];
+            decrypt(input_path, key_path);
         }
         //else
         _ => {
