@@ -80,6 +80,7 @@ fn xor_key(input_path: &str, key_path: &str) -> Vec<u8> {
     return output_data;
 }
 
+//encrypts the input message using the key file and displays a qr code for a device to scan.
 fn encrypt(input_path: &str, key_path: &str) {
     let encrypted = xor_key(input_path, key_path);
 
@@ -109,6 +110,7 @@ fn encrypt(input_path: &str, key_path: &str) {
     println!("{}", image);
 }
 
+//decrypts input file using the key file and prints to terminal
 fn decrypt(input_path: &str, key_path: &str) {
     let output_data = xor_key(input_path, key_path);
     let message =
