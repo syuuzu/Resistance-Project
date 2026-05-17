@@ -213,7 +213,7 @@ fn display_usage(name: &str) {
     println!("  {} --help", name);
     println!("\nOptions:");
     println!(
-        "  -g <size_in_bytes> <output_key_file> generates a key of 32 bits  to <output_key_file>."
+        "  -g <size_in_bytes> <output_key_file> generates a key of 32 bits to <output_key_file>."
     );
     println!(
         "  -e <input_file> <key_file> displays a QR code of <input_file> encrypted with <key_file>. Max size of file size 2953 bytes."
