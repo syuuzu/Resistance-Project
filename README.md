@@ -2,7 +2,7 @@
 
 This is a stream cipher program designed for communication in a highly constrained, zero-trust environment.
 
-This project assumes major industrial hardware and open-source software distributions are subverted.
+This project assumes major industrial hardware and open-source software distributions are subverted and unsafe.
 ## Core Features
 
 * **QR Code Transmission:** A clean offline machine displays a QR code with encrypted data which is scanned by a secondary "dirty" transmission device. 
