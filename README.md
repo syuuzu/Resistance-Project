@@ -2,8 +2,7 @@
 
 A One-Time Pad (OTP) designed for communication in a highly constrained, zero-trust environment.
 
-This tool assumes major industrial hardware and open-source software distributions are subverted. Facilitates communication across an air-gap, so no sensitive data ever touches an internet connected machine.
-
+This program assumes major industrial hardware and open-source software distributions are subverted.
 ## Core Features
 
 * **QR Code Transmission:** A sterile machine displays a QR code with encrypted data which is scanned by a secondary "dirty" transmission device. 
