@@ -7,7 +7,6 @@ This project assumes major industrial hardware and open-source software distribu
 
 * **QR Code Transmission:** A clean offline machine displays a QR code with encrypted data which is scanned by a secondary "dirty" transmission device. 
 * **Vendored Dependencies:** Designed to be compiled entirely offline using vendored dependencies. Avoids the risk of using potentially compromised package managers during the build phase.
-* **Hardware Entropy:** Key generation relies directly on the Linux kernel's CSPRNG avoiding potentially backdoored CPU-level instructions (like Intel RDRAND).
 
 ## Threat Model & Setup
 
