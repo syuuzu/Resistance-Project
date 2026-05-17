@@ -2,7 +2,7 @@
 
 A One-Time Pad (OTP) designed for communication in a highly constrained, zero-trust environment.
 
-This tool assumes major industrial hardware and open-source software distributions are subverted. This program is designed to facilitate communication across an air-gap, so no sensitive data ever touches an internet connected machine.
+This tool assumes major industrial hardware and open-source software distributions are subverted. Facilitates communication across an air-gap, so no sensitive data ever touches an internet connected machine.
 
 ## Core Features
 
@@ -27,7 +27,8 @@ cargo build --release
 ## Usage
 ```bash
 ./resistance_otp --help
-
+```
+```bash
 Resistance OTP
 
 Usage:
