@@ -1,3 +1,7 @@
+//Matteo Guzman
+//5/17/2026
+//resistance.rs
+
 use qrcode::QrCode;
 use std::env;
 use std::fs::File;
