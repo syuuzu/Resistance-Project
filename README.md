@@ -5,7 +5,8 @@ This is a stream cipher program designed for communication in a highly constrain
 This project assumes major industrial hardware and open-source software distributions are subverted and unsafe.
 ## Core Features
 
-* **QR Code Transmission:** A clean offline machine displays a QR code with encrypted data which is scanned by a secondary "dirty" transmission device. 
+* **Stream Cipher:** Uses the Salsa20 cipher so one key can encrypt and decrypt multiple messages.
+* **QR Code Transmission:** An offline machine can display a QR code with encrypted data which is scanned by a secondary device without using usb or the internet. 
 * **Vendored Dependencies:** Designed to be compiled entirely offline using vendored dependencies. Avoids the risk of using potentially compromised package managers during the build phase.
 
 ## Threat Model & Setup
