@@ -179,7 +179,7 @@ fn encrypt(input_path: &str, key_path: &str) {
         .build();
 
     println!("{}", image);
-    println!("Safe to scan with a dirty device");
+    println!("Safe to scan");
 }
 
 //decrypts input file using the key file and prints to terminal
