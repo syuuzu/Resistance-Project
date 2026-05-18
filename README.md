@@ -9,7 +9,7 @@ This project assumes major industrial hardware and open-source software distribu
 * **QR Code Transmission:** An offline machine can display a QR code with encrypted data to transfer to another device without using any wires or radios.
 * **Vendored Dependencies:** Designed to be compiled entirely offline using vendored dependencies. Avoids the risk of using potentially compromised package managers during the build phase.
 
-## Threat Model & Setup
+## Setup
 
 This software is intended to be run on a air-gapped machine and secure machine.
 
