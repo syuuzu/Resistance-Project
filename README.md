@@ -6,7 +6,7 @@ This project assumes major industrial hardware and open-source software distribu
 ## Core Features
 
 * **Stream Cipher:** Uses the Salsa20 cipher so one key can encrypt and decrypt multiple messages.
-* **QR Code Transmission:** An offline machine can display a QR code with encrypted data which is scanned by a secondary device without using usb or the internet. 
+* **QR Code Transmission:** An offline machine can display a QR code with encrypted data to transfer to another device without using any wires or radios.
 * **Vendored Dependencies:** Designed to be compiled entirely offline using vendored dependencies. Avoids the risk of using potentially compromised package managers during the build phase.
 
 ## Threat Model & Setup
@@ -16,7 +16,7 @@ This software is intended to be run on a strictly air-gapped machine (e.g. a Lib
 **Do not** compile this binary on an internet-connected machine.
 
 1. On a internet connected machine, clone this repository.
-2. Burn the entire project directory to a read-only CD-R or DVD-R.
+2. Burn the entire project directory to a read-only CD or DVD.
 3. Insert the disk into your air-gapped machine.
 4. Compile the binary locally on the trusted hardware:
 ```bash
