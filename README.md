@@ -14,7 +14,7 @@ This software is intended to be run on a strictly air-gapped machine (e.g. a Lib
 
 **Do not** compile this binary on an internet-connected machine.
 
-1. On a "dirty" internet connected machine, clone this repository.
+1. On a internet connected machine, clone this repository.
 2. Burn the entire project directory to a read-only CD-R or DVD-R.
 3. Insert the disk into your air-gapped machine.
 4. Compile the binary locally on the trusted hardware:
