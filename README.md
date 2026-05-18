@@ -11,9 +11,7 @@ This project assumes major industrial hardware and open-source software distribu
 
 ## Setup
 
-This software is intended to be run on a air-gapped machine and secure machine.
-
-**Do not** compile this program on an internet-connected machine.
+This software is intended to be run on a air-gapped machine and secure machine. For the sake of the threat model **do not** compile this program on an internet-connected machine.
 
 1. On a internet connected device, clone this repository.
 2. Burn the entire project directory to a read-only CD or DVD.
