@@ -1,8 +1,9 @@
 # Resistance Project
+Cryptology Class Project
 
-This is a stream cipher program designed for communication in a highly constrained, zero-trust environment.
+Stream cipher program designed for communication in a highly constrained, zero-trust environment.
 
-This project assumes major industrial hardware and open-source software distributions are subverted and unsafe.
+The threat model assumes major industrial hardware and open-source software distributions are subverted and unsafe.
 ## Core Features
 
 * **Stream Cipher:** Uses the Salsa20 cipher so one key can encrypt and decrypt multiple messages.
